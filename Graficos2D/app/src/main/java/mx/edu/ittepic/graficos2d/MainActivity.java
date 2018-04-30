@@ -38,9 +38,9 @@ public class MainActivity extends AppCompatActivity {
             super(context);
             sX=sY=mX=mY=hX=hY=0;
             final int[] s = {5};
-            final int[] m={12};
+            final int[] m={45};
             final int[] h={1};
-            timer=new CountDownTimer(61000,1000) {
+            timer=new CountDownTimer(915,15) {
                 @Override
                 public void onTick(long millisUntilFinished) {
                     double angle = Math.PI / 30 * (s[0] - 16);
@@ -61,7 +61,6 @@ public class MainActivity extends AppCompatActivity {
                 public void onFinish() {
                     //Se ejecuta al finalizar el conteo
                     invalidate();
-                    s[0]= 0;
                     m[0]=m[0]+1;
                     if(m[0]%60==0){
                         h[0]=h[0]+1;
@@ -77,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
             super.onDraw(canvas);
             // Objeto Paint
             Paint paint = new Paint();
-            paint.setColor(Color.BLACK);
+            paint.setColor(Color.WHITE);
 
             // Pintar el canvas
             canvas.drawPaint(paint);
@@ -85,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
             // Obtener dimensiones
             int ancho = canvas.getWidth();
             int alto = canvas.getHeight();
-            paint.setColor(Color.WHITE);
+            paint.setColor(Color.BLACK);
             paint.setTextSize(50);
             paint.setAntiAlias(true);
 
@@ -93,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
             canvas.drawText("ancho" + ancho + "altura" + alto, 30, 30, paint);
 
             // Lineas
-            paint.setColor(Color.WHITE);
+            paint.setColor(Color.BLACK);
             canvas.drawLine(0, 40, ancho, 40, paint);
             canvas.drawLine(20, 0, 20, alto, paint);
 
@@ -113,10 +112,13 @@ public class MainActivity extends AppCompatActivity {
                 canvas.drawText(tmp, x, y, paint);
             }
             //Segundos
+            paint.setColor(Color.RED);
             canvas.drawLine(ancho/2,ancho/2,sX,sY,paint);
             //Minutos
+            paint.setColor(Color.BLUE);
             canvas.drawLine(ancho/2,ancho/2,mX,mY,paint);
             //Horas
+            paint.setColor(Color.GREEN);
             canvas.drawLine(ancho/2,ancho/2,hX,hY,paint);
         }
 

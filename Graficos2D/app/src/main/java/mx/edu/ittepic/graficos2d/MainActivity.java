@@ -37,22 +37,22 @@ public class MainActivity extends AppCompatActivity {
         public PapelView(Context context) {
             super(context);
             sX=sY=mX=mY=hX=hY=0;
-            final int[] s = {5};
-            final int[] m={45};
-            final int[] h={1};
-            timer=new CountDownTimer(915,15) {
+            final int[] s = {0};
+            final int[] m={0};
+            final int[] h={0};
+            timer=new CountDownTimer(1001,15) {
                 @Override
                 public void onTick(long millisUntilFinished) {
-                    double angle = Math.PI / 30 * (s[0] - 16);
+                    s[0]=s[0]+1;
+                    double angle = Math.PI / 30 * (s[0] - 15);
                     sX = (int) (1080 / 2 + Math.cos(angle) * radio - rect.width() / 2);
                     sY = (int) (1080 / 2 + Math.sin(angle) * radio - rect.width() / 2);
-                    double angle2 = Math.PI / 30 * (m[0] - 16);
+                    double angle2 = Math.PI / 30 * (m[0] - 15);
                     mX = (int) (1080 / 2 + Math.cos(angle2) * radio - rect.width() / 2);
                     mY = (int) (1080 / 2 + Math.sin(angle2) * radio - rect.width() / 2);
                     double angle3 = Math.PI / 6 * (h[0] - 3);
                     hX = (int) (1080 / 2 + Math.cos(angle3) * radio - rect.width() / 2);
                     hY = (int) (1080 / 2 + Math.sin(angle3) * radio - rect.width() / 2);
-                    s[0]=s[0]+1;
                     invalidate();
 
                 }
@@ -60,12 +60,15 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onFinish() {
                     //Se ejecuta al finalizar el conteo
-                    invalidate();
+                    s[0]=0;
+
                     m[0]=m[0]+1;
                     if(m[0]%60==0){
                         h[0]=h[0]+1;
                     }
+                    invalidate();
                     timer.start();
+
 
                 }
             };
